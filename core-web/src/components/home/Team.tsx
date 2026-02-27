@@ -5,58 +5,13 @@ import Image from 'next/image';
 
 import { Linkedin, Instagram, Github } from 'lucide-react';
 
-const TEAM = [
-    {
-        name: 'Raviprakash Patel',
-        role: 'Founder & Architect',
-        image: '/team/Raviprakash.png',
-        linkedin: 'https://www.linkedin.com/in/raviprakash-patel-122690302/',
-        github: 'https://github.com/REESHI111',
-        instagram: 'https://www.instagram.com/rishi_2027_/'
-    },
-    {
-        name: 'Kush Kundariya',
-        role: 'AI Engineer',
-        image: '/team/kush.png',
-        linkedin: 'https://www.linkedin.com/in/kush-kundariya-6993ab286/',
-        github: 'https://github.com/kush90811',
-        instagram: 'https://www.instagram.com/kushkundariya/'
-    },
-    {
-        name: 'Prince Sikotra',
-        role: 'ML Engineer',
-        image: '/team/prince.png',
-        linkedin: 'https://www.linkedin.com/in/prince-sikotra-4a786a266/',
-        github: 'https://github.com/prisik-45',
-        instagram: 'https://www.instagram.com/_prisik_.45/'
-    },
-    {
-        name: 'Abhishek Mitra',
-        role: 'AI-ML Developer',
-        image: '/team/abhishek.png',
-        linkedin: 'https://www.linkedin.com/in/abh1shek-mitra/',
-        github: 'https://github.com/abhish4k-467',
-        instagram: 'https://www.instagram.com/abh1sh4k__/'
-    },
-    {
-        name: 'Mayur Patil',
-        role: 'HR & Web Engineer',
-        image: '/team/Mayur.png',
-        linkedin: 'https://www.linkedin.com/in/mayur-patil-345b85264/',
-        github: 'https://github.com/Mjpatil077',
-        instagram: 'https://www.instagram.com/mayurpatil3807/'
-    },
-    {
-        name: 'Shrey Desai',
-        role: 'Media Head & Dev',
-        image: '/team/shrey.png',
-        linkedin: 'https://www.linkedin.com/in/shrey-desai-223aa6209/',
-        github: '#',
-        instagram: 'https://www.instagram.com/shreydesai_1612/'
-    }
-];
+import type { TeamMember } from '@/lib/content';
 
-export default function Team() {
+type TeamProps = {
+    members: TeamMember[];
+};
+
+export default function Team({ members }: TeamProps) {
     return (
         <section className="bg-white text-black py-32 md:py-48 w-full border-t border-black/5">
             <div className="container mx-auto px-6">
@@ -73,9 +28,9 @@ export default function Team() {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 md:gap-8">
-                    {TEAM.map((member, index) => (
+                    {members.map((member, index) => (
                         <motion.div
-                            key={index}
+                            key={member.id}
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: '-50px' }}
@@ -89,7 +44,7 @@ export default function Team() {
                                     transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                                 >
                                     <Image
-                                        src={member.image}
+                                        src={member.image_url}
                                         alt={member.name}
                                         fill
                                         className="object-cover transition-transform duration-700"
@@ -104,13 +59,13 @@ export default function Team() {
                                     <p className="text-[10px] lg:text-xs text-neutral-500 font-mono uppercase tracking-wider">{member.role}</p>
                                 </div>
                                 <div className="flex gap-2.5 items-center mt-1 shrink-0">
-                                    <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors">
+                                    <a href={member.linkedin_url} target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors">
                                         <Linkedin className="w-[14px] h-[14px]" />
                                     </a>
-                                    <a href={member.github} target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors">
+                                    <a href={member.github_url} target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors">
                                         <Github className="w-[14px] h-[14px]" />
                                     </a>
-                                    <a href={member.instagram} target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors">
+                                    <a href={member.instagram_url} target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors">
                                         <Instagram className="w-[14px] h-[14px]" />
                                     </a>
                                 </div>

@@ -1,24 +1,14 @@
-'use client';
+﻿'use client';
 
 import { motion } from 'framer-motion';
 
-const SKILLS = [
-    'Web Design',
-    'App Development',
-    'AI-ML Solutions',
-    'Agentic Solutions',
-    'Next.js 14+',
-    'Full-Stack Execution',
-    'Motion Design',
-    'WebGL',
-    'UI/UX Strategy',
-    'Performance Optimization',
-    'Cloud Infrastructure',
-    'Product Design',
-    'Social Media Services'
-];
+import type { Capability } from '@/lib/content';
 
-export default function Marquee() {
+type MarqueeProps = {
+    capabilities: Capability[];
+};
+
+export default function Marquee({ capabilities }: MarqueeProps) {
     return (
         <section className="bg-black py-24 md:py-32 w-full overflow-hidden border-t border-b border-white/5">
             <div className="container mx-auto px-6 max-w-lg text-center mb-16">
@@ -37,12 +27,12 @@ export default function Marquee() {
                     className="flex flex-row"
                 >
                     {/* Double array to ensure seamless infinite looping */}
-                    {[...SKILLS, ...SKILLS, ...SKILLS].map((skill, index) => (
+                    {[...capabilities, ...capabilities, ...capabilities].map((skill, index) => (
                         <span
                             key={index}
                             className="text-4xl md:text-6xl font-medium px-8 text-neutral-300 transition-colors hover:text-white"
                         >
-                            • {skill}
+                            * {skill.label}
                         </span>
                     ))}
                 </motion.div>

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { motion } from 'framer-motion';
 
@@ -16,7 +16,7 @@ export default function VisionPage() {
                         The Vision
                     </p>
                     <h1 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.1] mb-16">
-                        We don't just build. We architect.
+                        We don&apos;t just build. We architect.
                     </h1>
                 </motion.div>
 
@@ -28,7 +28,7 @@ export default function VisionPage() {
                 >
                     <div className="text-lg text-neutral-400 font-light leading-relaxed flex flex-col gap-8">
                         <p>
-                            In a digital landscape crowded with templates and compromises, CORE stands apart as an engineering elite. We partner with ambitious brands to construct platforms that don't just function—they dominate.
+                            In a digital landscape crowded with templates and compromises, CORE stands apart as an engineering elite. We partner with ambitious brands to construct platforms that don&apos;t just function, they dominate.
                         </p>
                         <p>
                             Our philosophy is rooted in absolute precision. Every line of code, every micro-interaction, and every architectural decision is calculated to deliver a flawless, high-performance experience.

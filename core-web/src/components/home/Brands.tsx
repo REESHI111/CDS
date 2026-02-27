@@ -3,17 +3,13 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-// To add your own custom logos, place the image files (e.g., .png or .svg) in the public/logos directory 
-// and update the 'image' path below.
-const LOGOS = [
-    { name: 'Affinitty', image: '/logos/Affinitty.jpg' },
-    { name: 'Elisium', image: '/logos/Elisium.png' },
-    { name: 'Quikit', image: '/logos/Quikit.png' },
-    { name: 'Cognosync', image: '/logos/cognosync.png' },
-    { name: 'Autonomerz', image: '/logos/Autonomerz.png' },
-];
+import type { Brand } from '@/lib/content';
 
-export default function Brands() {
+type BrandsProps = {
+    brands: Brand[];
+};
+
+export default function Brands({ brands }: BrandsProps) {
     return (
         <section className="bg-black text-white w-full border-t border-white/5 pt-32 pb-12">
             <div className="container mx-auto px-6 mb-16 text-center">
@@ -44,12 +40,12 @@ export default function Brands() {
                     }}
                 >
                     {/* Render twice for seamless looping */}
-                    {[...LOGOS, ...LOGOS, ...LOGOS].map((logo, idx) => (
+                    {[...brands, ...brands, ...brands].map((logo, idx) => (
                         <div key={idx} className="flex items-center gap-6 group">
                             <div className="relative h-12 md:h-16 w-32 md:w-40 opacity-60 group-hover:opacity-100 transition-opacity flex-shrink-0">
                                 {/* The CSS filters below automatically turn any image black/white and theme-friendly */}
                                 <Image
-                                    src={logo.image}
+                                    src={logo.image_url}
                                     alt={logo.name}
                                     fill
                                     className="object-contain grayscale contrast-200 brightness-[3] group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100 transition-all duration-500 mix-blend-screen"

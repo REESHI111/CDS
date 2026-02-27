@@ -3,34 +3,13 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-const PROJECTS = [
-    {
-        id: 1,
-        title: 'Project Alpha',
-        category: 'Classified',
-        year: 'Coming Soon',
-        image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop',
-        color: 'bg-zinc-900',
-    },
-    {
-        id: 2,
-        title: 'Project Beta',
-        category: 'Classified',
-        year: 'Coming Soon',
-        image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2000&auto=format&fit=crop',
-        color: 'bg-neutral-900',
-    },
-    {
-        id: 3,
-        title: 'Project Gamma',
-        category: 'Classified',
-        year: 'Coming Soon',
-        image: 'https://images.unsplash.com/photo-1635773054098-9caeb584c599?q=80&w=2565&auto=format&fit=crop',
-        color: 'bg-stone-900',
-    }
-];
+import type { FeaturedProject } from '@/lib/content';
 
-export default function FeaturedWork() {
+type FeaturedWorkProps = {
+    projects: FeaturedProject[];
+};
+
+export default function FeaturedWork({ projects }: FeaturedWorkProps) {
     return (
         <section className="bg-black text-white py-32 md:py-48 w-full border-t border-white/5">
             <div className="container mx-auto px-6">
@@ -50,7 +29,7 @@ export default function FeaturedWork() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-0 lg:px-12">
-                    {PROJECTS.map((project, index) => (
+                    {projects.map((project, index) => (
                         <motion.div
                             key={project.id}
                             initial={{ opacity: 0, y: 50 }}
@@ -59,14 +38,14 @@ export default function FeaturedWork() {
                             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: index * 0.1 }}
                             className="group cursor-pointer"
                         >
-                            <div className={`relative w-full aspect-[4/5] md:aspect-[3/4] overflow-hidden ${project.color}`}>
+                            <div className={`relative w-full aspect-[4/5] md:aspect-[3/4] overflow-hidden ${project.color_class}`}>
                                 <motion.div
                                     className="w-full h-full relative"
                                     whileHover={{ scale: 1.05 }}
                                     transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                                 >
                                     <Image
-                                        src={project.image}
+                                        src={project.image_url}
                                         alt={project.title}
                                         fill
                                         className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700"
@@ -87,7 +66,7 @@ export default function FeaturedWork() {
                                     <h3 className="text-2xl font-medium tracking-wide mb-2">{project.title}</h3>
                                     <p className="text-sm text-neutral-500 font-mono uppercase tracking-wider">{project.category}</p>
                                 </div>
-                                <span className="text-sm text-neutral-400 font-mono">{project.year}</span>
+                                <span className="text-sm text-neutral-400 font-mono">{project.year_label}</span>
                             </div>
                         </motion.div>
                     ))}

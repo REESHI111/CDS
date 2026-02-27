@@ -35,7 +35,7 @@ export default function CareerPage() {
                             <div>
                                 <h3 className="text-3xl font-medium mb-4">Open Application</h3>
                                 <p className="text-neutral-400 max-w-lg">
-                                    Don't see a specific role? If you belong in the top 1% of your field, we want to talk to you. Show us your work.
+                                    Don&apos;t see a specific role? If you belong in the top 1% of your field, we want to talk to you. Show us your work.
                                 </p>
                             </div>
                         </div>

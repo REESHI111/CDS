@@ -2,14 +2,43 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { getSupabaseBrowserClient } from '@/lib/supabase/client';
 
 export default function ContactPage() {
-    const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
+    const [formState, setFormState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+    const [errorMessage, setErrorMessage] = useState('');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setFormState('submitting');
-        setTimeout(() => setFormState('success'), 1500); // Mock submission
+        setErrorMessage('');
+
+        const supabase = getSupabaseBrowserClient();
+        if (!supabase) {
+            setFormState('error');
+            setErrorMessage('Supabase is not configured.');
+            return;
+        }
+
+        const formData = new FormData(e.currentTarget);
+        const payload = {
+            name: String(formData.get('name') ?? ''),
+            email: String(formData.get('email') ?? ''),
+            phone: String(formData.get('phone') ?? ''),
+            language: String(formData.get('language') ?? ''),
+            details: String(formData.get('details') ?? ''),
+        };
+
+        const { error } = await supabase.from('contact_requests').insert(payload);
+
+        if (error) {
+            setFormState('error');
+            setErrorMessage(error.message);
+            return;
+        }
+
+        e.currentTarget.reset();
+        setFormState('success');
     };
 
     return (
@@ -142,6 +171,9 @@ export default function ContactPage() {
                                     </svg>
                                 )}
                             </button>
+                            {formState === 'error' ? (
+                                <p className="text-sm text-red-400">{errorMessage}</p>
+                            ) : null}
                         </form>
                     )}
                 </motion.div>
